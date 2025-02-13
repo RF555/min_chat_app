@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:min_chat_app/components/my_drawer.dart';
+import 'package:min_chat_app/components/user_tile.dart';
+import 'package:min_chat_app/pages/chat_page.dart';
+import 'package:min_chat_app/services/auth_service.dart';
+import 'package:min_chat_app/services/chat/chat_service.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  // chat & auth service
+  final ChatService _chatService = ChatService();
+  final AuthService _authService = AuthService();
 
 
   @override
@@ -12,6 +20,47 @@ class HomePage extends StatelessWidget {
         title: Text("Home"),
       ),
       drawer: MyDrawer(),
+    );
+  }
+
+  // build a list of users except the current user
+  Widget buildUserList() {
+    return StreamBuilder(
+      stream: _chatService.getUserStream(),
+      builder: (context, snapshot) {
+        // error
+        if (snapshot.hasError) {
+          return Text("Error: ${snapshot.error}");
+        }
+        // loading
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Text("Loading...");
+        }
+
+        // return a list view of users
+        return ListView(
+          children: snapshot.data!.map<Widget>((userData) => _buildUserListItem(userData, context)).toList(),
+        );
+      }
+    );
+  }
+
+  // build individual user list item
+  Widget _buildUserListItem(Map<String, dynamic> userData, BuildContext context) {
+    // display all users except the current user
+    return UserTile(
+      text: userData['email'],
+      onTap:() {
+        // tapped on a user -> go to chat page
+        Navigator.push(
+          context, 
+          MaterialPageRoute(
+            builder: (context) => ChatPage(
+              receiverEmail: userData['email'],
+            )
+          )
+        );
+      }
     );
   }
 }
