@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:min_chat_app/components/my_drawer.dart';
 import 'package:min_chat_app/components/user_tile.dart';
 import 'package:min_chat_app/pages/chat_page.dart';
-import 'package:min_chat_app/services/auth_service.dart';
+import 'package:min_chat_app/services/auth/auth_service.dart';
 import 'package:min_chat_app/services/chat/chat_service.dart';
 
 class HomePage extends StatelessWidget {
