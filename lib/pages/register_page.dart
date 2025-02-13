@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:min_chat_app/components/my_buttom.dart';
 import 'package:min_chat_app/components/my_textfeild.dart';
 
-class LoginPage extends StatelessWidget {
+class RegisterPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
-  // tap to go to register page
+  // tap to go to login page
   final void Function()? onTap;
 
-  LoginPage({super.key, required this.onTap});
+  RegisterPage({super.key, required this.onTap});
 
-
-  // login method
-  void login() {}
+  // register method
+  void register() {}
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +30,10 @@ class LoginPage extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
             ),
             const SizedBox(height: 50),
-            
+
             // welcome back message
             Text(
-              'Welcome back!',
+              'Let\'s create an account for you!',
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
                 fontSize: 20,
@@ -55,10 +55,18 @@ class LoginPage extends StatelessWidget {
               obscureText: true,
               controller: _passwordController,
             ),
+            const SizedBox(height: 10),
+
+            // confirm password textfield
+            MyTextField(
+              hintText: "Confirm Password",
+              obscureText: true,
+              controller: _confirmPasswordController,
+            ),
             const SizedBox(height: 25),
 
             // login button
-            MyButton(text: 'Login', onTap: login),
+            MyButton(text: 'Register', onTap: register),
             const SizedBox(height: 25),
 
             // register button
@@ -66,20 +74,19 @@ class LoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Not a member? ",
+                  "Already have an account? ",
                   style: TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
                 GestureDetector(
                   onTap: onTap,
                   child: Text(
-                    "Register now",
+                    "Login now",
                     style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.primary
                     ),
-                  )
                 )
-              ],
+)              ],
             )
           ],
         )
