@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:min_chat_app/components/my_buttom.dart';
 import 'package:min_chat_app/components/my_textfeild.dart';
 
 class LoginPage extends StatelessWidget {
@@ -6,6 +7,9 @@ class LoginPage extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
 
   LoginPage({super.key});
+
+  // login method
+  void login() {}
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +53,26 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 25),
 
             // login button
+            MyButton(text: 'Login', onTap: login),
+            const SizedBox(height: 25),
 
             // register button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Not a member? ",
+                  style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                ),
+                Text(
+                  "Register now",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary
+                    ),
+                )
+              ],
+            )
           ],
         )
       )
