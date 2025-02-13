@@ -20,11 +20,12 @@ class HomePage extends StatelessWidget {
         title: Text("Home"),
       ),
       drawer: MyDrawer(),
+      body: _buildUserList(),
     );
   }
 
   // build a list of users except the current user
-  Widget buildUserList() {
+  Widget _buildUserList() {
     return StreamBuilder(
       stream: _chatService.getUserStream(),
       builder: (context, snapshot) {
@@ -47,20 +48,24 @@ class HomePage extends StatelessWidget {
 
   // build individual user list item
   Widget _buildUserListItem(Map<String, dynamic> userData, BuildContext context) {
-    // display all users except the current user
-    return UserTile(
-      text: userData['email'],
-      onTap:() {
-        // tapped on a user -> go to chat page
-        Navigator.push(
-          context, 
-          MaterialPageRoute(
-            builder: (context) => ChatPage(
-              receiverEmail: userData['email'],
+    // display all users except the current user (by 'uid')
+    if (userData['uid'] != _authService.getCurrentUser()?.uid) {
+      return UserTile(
+        text: userData['email'],
+        onTap:() {
+          // tapped on a user -> go to chat page
+          Navigator.push(
+            context, 
+            MaterialPageRoute(
+              builder: (context) => ChatPage(
+                receiverEmail: userData['email'],
+              )
             )
-          )
-        );
-      }
-    );
+          );
+        }
+      );
+    } else{
+      return Container();
+    }
   }
 }
