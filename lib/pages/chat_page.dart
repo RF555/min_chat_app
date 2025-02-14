@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:min_chat_app/components/chat_bubble.dart';
 import 'package:min_chat_app/components/my_textfeild.dart';
 import 'package:min_chat_app/services/auth/auth_service.dart';
 import 'package:min_chat_app/services/chat/chat_service.dart';
@@ -37,6 +38,9 @@ class ChatPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(receiverEmail),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.grey,
+        elevation: 0,
       ),
       body: Column(
         children: [
@@ -87,17 +91,27 @@ class ChatPage extends StatelessWidget {
 
     return Container(
       alignment: alignment,
-      child: Text(data["message"]),
+      child: Column(
+        crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: [
+          ChatBubble(
+            message: data['message'],
+            isCurrentUser: isCurrentUser,
+          ),
+        ],
+      )
     );
   }
 
 
   // build message input
   Widget _buildMessageInput() {
-    return Row(
-      children: [
-        //textfield should take up most of the space
-        Expanded(child: MyTextField(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 50.0),
+      child: Row(
+        children: [
+          //textfield should take up most of the space
+          Expanded(child: MyTextField(
           hintText: "Type a message...",
           obscureText: false,
           controller: _messageController,
@@ -105,12 +119,21 @@ class ChatPage extends StatelessWidget {
         ),
 
         // send button
-        IconButton(
-          onPressed: sendMessage,
-          icon: Icon(Icons.arrow_upward),
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.green,
+            shape: BoxShape.circle,
+          ),
+          child: IconButton(
+            onPressed: sendMessage,
+            icon: Icon(
+              Icons.arrow_upward,
+              color: Colors.white,
+              ),
+          )
         )
       ],
-    );
+    ));
   }
 
 }
