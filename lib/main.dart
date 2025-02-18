@@ -18,14 +18,15 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Widget? authGate;
+  const MyApp({super.key, this.authGate});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Main Page',
-      home: const AuthGate(),
+      home: authGate ?? const AuthGate(),
       theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }
