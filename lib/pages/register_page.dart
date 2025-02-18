@@ -57,10 +57,10 @@ class RegisterPage extends StatelessWidget {
             // logo
             Icon(
             Icons.message,
-            size: 60,
+            size: 70,
             color: Theme.of(context).colorScheme.primary,
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 10),
 
             // welcome back message
             Text(
@@ -73,33 +73,45 @@ class RegisterPage extends StatelessWidget {
             const SizedBox(height: 50),
 
             // email textfield
-            MyTextField(
-              hintText: "Email",
-              obscureText: false,
-              controller: _emailController,
+            SizedBox(
+              width: 400,
+              child: MyTextField(
+                hintText: "Email",
+                obscureText: false,
+                controller: _emailController,
+              ),
             ),
             const SizedBox(height: 10),
 
             // password textfield
-            MyTextField(
-              hintText: "Password",
-              obscureText: true,
-              controller: _passwordController,
+            SizedBox(
+              width: 400,
+              child: MyTextField(
+                hintText: "Password",
+                obscureText: true,
+                controller: _passwordController,
+              ),
             ),
             const SizedBox(height: 10),
 
             // confirm password textfield
-            MyTextField(
-              hintText: "Confirm Password",
-              obscureText: true,
-              controller: _confirmPasswordController,
+            SizedBox(
+              width: 400,
+              child: MyTextField(
+                hintText: "Confirm Password",
+                obscureText: true,
+                controller: _confirmPasswordController,
+              ),
             ),
             const SizedBox(height: 25),
 
             // login button
-            MyButton(
-              text: 'Register',
-              onTap: () => register(context),
+            SizedBox(
+              width: 200,
+              child: MyButton(
+                text: 'Sign Up',
+                onTap: () => register(context),
+              ),
             ),
             const SizedBox(height: 25),
 

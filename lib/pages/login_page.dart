@@ -43,10 +43,10 @@ class LoginPage extends StatelessWidget {
             // logo
             Icon(
             Icons.message,
-            size: 60,
+            size: 70,
             color: Theme.of(context).colorScheme.primary,
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 10),
             
             // welcome back message
             Text(
@@ -59,25 +59,34 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 50),
 
             // email textfield
-            MyTextField(
-              hintText: "Email",
-              obscureText: false,
-              controller: _emailController,
+            SizedBox(
+              width: 400,
+              child: MyTextField(
+                hintText: "Email",
+                obscureText: false,
+                controller: _emailController,
+              ),
             ),
             const SizedBox(height: 10),
 
             // password textfield
-            MyTextField(
-              hintText: "Password",
-              obscureText: true,
-              controller: _passwordController,
+            SizedBox(
+              width: 400,
+              child: MyTextField(
+                hintText: "Password",
+                obscureText: true,
+                controller: _passwordController,
+              ),
             ),
             const SizedBox(height: 25),
 
             // login button
-            MyButton(
-              text: 'Login',
-              onTap: () => login(context),
+            SizedBox(
+              width: 200,
+              child: MyButton(
+                text: 'Login',
+                onTap: () => login(context),
+              ),
             ),
             const SizedBox(height: 25),
 
@@ -92,7 +101,7 @@ class LoginPage extends StatelessWidget {
                 GestureDetector(
                   onTap: onTap,
                   child: Text(
-                    "Register now",
+                    "Sign Up now",
                     style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.primary
